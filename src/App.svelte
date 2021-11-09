@@ -6,7 +6,7 @@
 	<div class="main-section">
 		<RandomVm />
 	</div>
-	<footer><a href="https://github.com/bmlt-enabled/randomvm/issues">Ideas?</a> | Meetings are sourced from https://virtual-na.org/meetings</footer>
+	<footer><a href="https://github.com/bmlt-enabled/randomvm/issues" target="_blank">Ideas?</a> | Meetings are sourced from <a href="https://virtual-na.org/meetings" target="_blank">https://virtual-na.org/meetings</a></footer>
 </main>
 
 <style>
