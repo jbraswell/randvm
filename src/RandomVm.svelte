@@ -4,6 +4,7 @@
     import fetchJsonp from 'fetch-jsonp';
 
     export let randomMeeting = [];
+    export let buttonTxt = "Get A Random Meeting";
     // export let meetings = [];
 
 
@@ -34,6 +35,7 @@
     }
 
     function getRandomMeeting() {
+        buttonTxt = "Finding Meeting..."
         fetchJsonp('https://bmlt.virtual-na.org/main_server/client_interface/jsonp/?switcher=GetSearchResults&data_field_key=weekday_tinyint,start_time,time_zone,meeting_name,comments')
             .then((response) => response.json())
             .then((meetings) => {
@@ -57,7 +59,9 @@
                         }
                     }
                 }
+                console.log(results)
                 randomMeeting = results[Math.floor(Math.random() * results.length)]
+                buttonTxt = "Get A Random Meeting"
             })
             .catch((ex) => console.log('parsing failed', ex));
     }
@@ -87,7 +91,7 @@
 
 <main>
     <div class="meeting-button">
-        <button on:click={getRandomMeeting}>Get A Random Meeting</button>
+        <button on:click={getRandomMeeting}>{buttonTxt}</button>
     </div>
     <br />
         {#if Object.keys(randomMeeting).length > 0}
