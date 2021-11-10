@@ -8,6 +8,7 @@ npm run dev
 ```
 
 ### github pages deploy
+
 to build run
 `npm run build`
 
