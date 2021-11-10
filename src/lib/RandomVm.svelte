@@ -2,8 +2,7 @@
   import moment from 'moment-timezone';
   import fetchJsonp from 'fetch-jsonp';
 
-  export let randomMeeting = [];
-  export let buttonTxt = 'Get A Random Meeting';
+  export let randomMeeting = null;
   export let currentlyRefreshing = false;
 
   function getAdjustedDateTime(meeting_day, meeting_time, meeting_time_zone) {
@@ -36,7 +35,6 @@
   }
 
   function getRandomMeeting() {
-    buttonTxt = 'Finding Meeting...';
     currentlyRefreshing = true;
     fetchJsonp('https://bmlt.virtual-na.org/main_server/client_interface/jsonp/?switcher=GetSearchResults&data_field_key=weekday_tinyint,start_time,time_zone,meeting_name,comments')
       .then((response) => response.json())
@@ -62,7 +60,6 @@
         }
         console.log(results);
         randomMeeting = results[Math.floor(Math.random() * results.length)];
-        buttonTxt = 'Get A Random Meeting';
         currentlyRefreshing = false;
       })
       .catch((ex) => console.log('parsing failed', ex));
@@ -70,8 +67,8 @@
 </script>
 
 <main>
-  <button class="button is-fullwidth" on:click={getRandomMeeting} disabled={currentlyRefreshing}>{buttonTxt}</button>
-  {#if Object.keys(randomMeeting).length > 0}
+  <button class="button is-fullwidth" class:is-loading={currentlyRefreshing} disabled={currentlyRefreshing} on:click={getRandomMeeting}>Get A Random Meeting</button>
+  {#if randomMeeting}
     <br />
     <div class="box is-shadowless has-text-centered m-0">
       <p class="title is-6">
