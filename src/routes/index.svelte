@@ -18,7 +18,7 @@
       <div class="content has-text-centered">
         <p>
           <a href="https://github.com/bmlt-enabled/randomvm/issues" target="_blank">Ideas?</a>
-          Meetings are sourced from
+          &#8226; Meetings are sourced from
           <a href="https://virtual-na.org/meetings" target="_blank">https://virtual-na.org/meetings</a>
         </p>
       </div>

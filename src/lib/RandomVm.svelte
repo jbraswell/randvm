@@ -74,7 +74,7 @@
   {#if Object.keys(randomMeeting).length > 0}
     <br />
     <div class="box is-shadowless has-text-centered m-0">
-      <p class="is-size-8">
+      <p class="title is-6">
         <b>{randomMeeting.name}</b> <br />
         {randomMeeting.start}<br />
         <a href={randomMeeting.link}>{randomMeeting.link}</a>
