@@ -73,10 +73,12 @@
   <button class="button is-fullwidth" on:click={getRandomMeeting} disabled={currentlyRefreshing}>{buttonTxt}</button>
   {#if Object.keys(randomMeeting).length > 0}
     <br />
-    <div class="block has-text-centered">
-      <b>{randomMeeting.name}</b> <br />
-      {randomMeeting.start}<br />
-      <a href={randomMeeting.link}>{randomMeeting.link}</a>
+    <div class="box is-shadowless has-text-centered m-0">
+      <p class="is-size-8">
+        <b>{randomMeeting.name}</b> <br />
+        {randomMeeting.start}<br />
+        <a href={randomMeeting.link}>{randomMeeting.link}</a>
+      </p>
     </div>
   {/if}
 </main>
