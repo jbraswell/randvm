@@ -2,7 +2,7 @@
   import moment from 'moment-timezone';
   import fetchJsonp from 'fetch-jsonp';
 
-  export let randomMeeting = [];
+  export let randomMeeting = null;
   export let currentlyRefreshing = false;
 
   function getAdjustedDateTime(meeting_day, meeting_time, meeting_time_zone) {
@@ -68,7 +68,7 @@
 
 <main>
   <button class="button is-fullwidth" class:is-loading={currentlyRefreshing} disabled={currentlyRefreshing} on:click={getRandomMeeting}>Get A Random Meeting</button>
-  {#if Object.keys(randomMeeting).length > 0}
+  {#if randomMeeting}
     <br />
     <div class="box is-shadowless has-text-centered m-0">
       <p class="is-size-8">
