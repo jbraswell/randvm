@@ -57,6 +57,7 @@
         meetingsResult = results;
         currentlyRefreshing = false;
       })
+      .then(() => getRandomMeeting())
       .catch((ex) => console.log('parsing failed', ex));
   });
 
