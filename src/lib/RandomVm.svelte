@@ -1,8 +1,10 @@
 <script>
+  import { onMount } from 'svelte';
   import moment from 'moment-timezone';
   import fetchJsonp from 'fetch-jsonp';
 
   export let randomMeeting = null;
+  export let meetingsResult = null;
   export let currentlyRefreshing = false;
 
   function getAdjustedDateTime(meeting_day, meeting_time, meeting_time_zone) {
@@ -34,7 +36,7 @@
     return meeting_date_time_obj;
   }
 
-  function getRandomMeeting() {
+  onMount(() => {
     currentlyRefreshing = true;
     fetchJsonp('https://bmlt.virtual-na.org/main_server/client_interface/jsonp/?switcher=GetSearchResults&data_field_key=weekday_tinyint,start_time,time_zone,meeting_name,comments')
       .then((response) => response.json())
@@ -48,21 +50,18 @@
             let start = getAdjustedDateTime(meeting_day, meeting_time, meeting_time_zone);
             let now = moment.tz(moment.tz.guess());
             if (start.diff(now, 'minutes') >= 0 && start.diff(now, 'minutes') <= 30) {
-              results.push({
-                name: meetings[x]['meeting_name'],
-                start: start._d.toString(),
-                link: meetings[x]['comments'],
-                time: meeting_time,
-                time_zone: meeting_time_zone
-              });
+              results.push({ name: meetings[x]['meeting_name'], start: start._d.toString(), link: meetings[x]['comments'] });
             }
           }
         }
-        console.log(results);
-        randomMeeting = results[Math.floor(Math.random() * results.length)];
+        meetingsResult = results;
         currentlyRefreshing = false;
       })
       .catch((ex) => console.log('parsing failed', ex));
+  });
+
+  function getRandomMeeting() {
+    randomMeeting = meetingsResult[Math.floor(Math.random() * meetingsResult.length)];
   }
 </script>
 
