@@ -16,8 +16,8 @@
     }
 
     // Get an object that represents the meeting in its time zone
-    meeting_date_time_obj = moment
-      .tz(meeting_time_zone)
+    meeting_date_time_obj = moment()
+      .tz(meeting_time_zone, true)
       .set({
         hour: meeting_time.split(':')[0],
         minute: meeting_time.split(':')[1],
@@ -50,7 +50,7 @@
             let start = getAdjustedDateTime(meeting_day, meeting_time, meeting_time_zone);
             let now = moment.tz(moment.tz.guess());
             if (start.diff(now, 'minutes') >= 0 && start.diff(now, 'minutes') <= 30) {
-              results.push({ name: meetings[x]['meeting_name'], start: start._d.toString(), link: meetings[x]['comments'] });
+              results.push({ name: meetings[x]['meeting_name'], start: start.toString(), link: meetings[x]['comments'] });
             }
           }
         }
